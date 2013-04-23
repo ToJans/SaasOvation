@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SaasOvation.IssueTrack.Domain.Model
 {
-    class ProductCatalog
+    public interface IModifyProductState
     {
+        void ProductRegistered(ProductId Id, TenantId TenantId, string a_product_name, string a_product_description);
     }
 }

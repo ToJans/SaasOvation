@@ -16,8 +16,18 @@ namespace SaasOvation.IssueTrack.Domain.Model
 
     public class Product: IHandleProductCommands
     {
+        private IModifyProductState Apply;
+        private IQueryProducts Query;
+
+        public Product(IModifyProductState Apply,IQueryProducts Query) {
+            this.Apply = Apply;
+            this.Query = Query;
+        }
+
         public void RegisterProduct(ProductId a_product_id, TenantId a_tenant_id, string a_product_name, string a_product_description)
         {
+            Guard.Against(Query.ProductExists(a_product_id),"The product is already registered.");
+            Apply.ProductRegistered(a_product_id, a_tenant_id, a_product_name, a_product_description);
         }
     }
 }

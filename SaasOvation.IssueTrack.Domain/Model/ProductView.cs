@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SaasOvation.IssueTrack.Domain.Model
 {
-    interface IQueryProducts
+    public class ProductView
     {
+        public ProductId Id { get; set; }
+        public TenantId TenantId { get; set; }
     }
 }
