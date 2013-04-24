@@ -11,11 +11,13 @@ Due to my more recent experiments with [Erlang](http://www.erlang.org/), I think
 It looks rather similar to the actor model, and is based on the fact that Erlang actually uses processes that communicate with eachother while respecting OO principles the way they were intended.
 
 In Erlang, while counterintuitive from the perspective of a conventional OO thinker, all OO principles are respected by having processes that communicate through messaging only:
+
 - Dynamic dispatch
 - Encapsulation 
 - Polymorphism 
 - Inheritance
 - Open recursion
+ 
 If you see erlang code combined with DDD, there is almost NO infrastructure code there...
 
 [As Alan Kay points out](http://lists.squeakfoundation.org/pipermail/squeak-dev/1998-October/017019.html), the original focus in OO was not about the state, but about the interactions/messaging between objects.
