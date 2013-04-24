@@ -11,7 +11,6 @@ namespace SaasOvation.IssueTrack.Domain.Specs
     {
         IHandleProductCommands SUT;
         ProductState State;
-        TicketState TicketState;
 
         TenantId a_tenant_id = new TenantId(Guid.NewGuid());
         ProductId a_product_id = new ProductId(Guid.NewGuid());

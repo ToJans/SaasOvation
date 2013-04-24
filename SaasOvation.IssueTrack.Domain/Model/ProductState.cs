@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 namespace SaasOvation.IssueTrack.Domain.Model
 {
 
-    public class ProductState:TicketState, IModifyProductState, IQueryProductState
+    public class ProductState:IssueState, IModifyProductState, IQueryProductState
     {
         List<TenantId> ActiveTenants = new List<TenantId>();
         List<ProductView> RegisteredProducts = new List<ProductView>();
+        List<Tuple<TenantId, IssueAssignerId>> Assigners = new List<Tuple<TenantId, IssueAssignerId>>();
         
 
         public void ProductActivated(TenantId TenantId, ProductId Id, string a_product_name, string a_product_description)
@@ -40,6 +41,19 @@ namespace SaasOvation.IssueTrack.Domain.Model
         public void TenantActivated(TenantId a_tenant_id)
         {
             ActiveTenants.Add(a_tenant_id);
+        }
+
+
+        public bool IsActive(TenantId TenantId, IssueAssignerId assignerId)
+        {
+            if (!ActiveTenants.Contains(TenantId)) return false;
+            return Assigners.Any(x=>x.Item1 == TenantId && x.Item2 == assignerId);
+        }
+
+
+        public void IssueAssignerActivated(TenantId a_tenant, IssueAssignerId an_assigner)
+        {
+            Assigners.Add(Tuple.Create(a_tenant, an_assigner));
         }
     }
 }

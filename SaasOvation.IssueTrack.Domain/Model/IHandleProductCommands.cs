@@ -8,7 +8,7 @@ namespace SaasOvation.IssueTrack.Domain.Model
     public interface IHandleProductCommands
     {
         void ActivateProduct(TenantId Tenant,ProductId Id, string Name, string Description);
-        void RequestFeature(TenantId Tenant,ProductId Product,TicketId Id,string Name,string Description);
-        void ReportDefect(TenantId Tenant, ProductId Product, TicketId Id, string Name, string Description);
+        void RequestFeature(TenantId Tenant,ProductId Product,IssueId Id,string Name,string Description,IssueAssignerId Assigner);
+        void ReportDefect(TenantId Tenant, ProductId Product, IssueId Id, string Name, string Description, IssueAssignerId Assigner);
     }
 }

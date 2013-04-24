@@ -6,11 +6,13 @@ using System.Text;
 
 namespace SaasOvation.IssueTrack.Domain
 {
-    public class TicketView
+    public class IssueView
     {
         public string Name;
-        public TicketId Id;
+        public IssueId Id;
 
         public string Description { get; set; }
+
+        public IssueAssignerId Assigner { get; set; }
     }
 }

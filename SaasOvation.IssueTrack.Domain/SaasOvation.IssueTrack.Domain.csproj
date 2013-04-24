@@ -41,18 +41,19 @@
   <ItemGroup>
     <Compile Include="Model\Guard.cs" />
     <Compile Include="Model\IModifyProductState.cs" />
-    <Compile Include="Model\IModifyTicketState.cs" />
+    <Compile Include="Model\IModifyIssueState.cs" />
     <Compile Include="Model\IQueryProductState.cs" />
-    <Compile Include="Model\IQueryTicketState.cs" />
-    <Compile Include="Model\Ticket.cs" />
+    <Compile Include="Model\IQueryIssueState.cs" />
+    <Compile Include="Model\IssueAssigner.cs" />
+    <Compile Include="Model\Issue.cs" />
     <Compile Include="Model\ProductState.cs" />
     <Compile Include="Model\ProductView.cs" />
     <Compile Include="Model\Tenant.cs" />
     <Compile Include="Model\GenericId.cs" />
     <Compile Include="Model\IHandleProductCommands.cs" />
     <Compile Include="Model\Product.cs" />
-    <Compile Include="Model\TicketState.cs" />
-    <Compile Include="Model\TicketView.cs" />
+    <Compile Include="Model\IssueState.cs" />
+    <Compile Include="Model\IssueView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace SaasOvation.IssueTrack.Domain.Model
 {
-    public class TicketId: GenericId
+    public class IssueId: GenericId
     {
-        public TicketId(Guid id):base(id) { }
+        public IssueId(Guid id):base(id) { }
 
         protected override string TypeString
         {
-            get { return "ticket"; }
+            get { return "issue"; }
         }
     }
 
-    public class Ticket
+    public class Issue
     {
         public TenantId Tenant { get; set; }
         public ProductId Product { get; set; }
-        public TicketId Id { get; set; }
+        public IssueId Id { get; set; }
     }
 }

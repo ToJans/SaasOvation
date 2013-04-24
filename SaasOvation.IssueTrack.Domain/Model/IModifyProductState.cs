@@ -5,8 +5,10 @@ using System.Text;
 
 namespace SaasOvation.IssueTrack.Domain.Model
 {
-    public interface IModifyProductState:IModifyTicketState
+    public interface IModifyProductState:IModifyIssueState
     {
         void ProductActivated(TenantId Tenant,ProductId Id, string Name, string Description);
+
+        
     }
 }

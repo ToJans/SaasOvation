@@ -6,20 +6,22 @@ using System;
 namespace SaasOvation.IssueTrack.Domain
 {
     [TestClass]
-    public class Manipulating_a_ticket
+    public class Manipulating_an_issue
     {
         Product SUT;
         TenantId a_tenant = new TenantId(Guid.NewGuid());
+
+        IssueAssignerId an_assigner = new IssueAssignerId(Guid.NewGuid());
 
         ProductId a_product=new ProductId(Guid.NewGuid());
         string a_product_name = "SaasOvational";
         string a_product_description = "Are you talkin' to me?";
 
-        TicketId a_feature = new TicketId(Guid.NewGuid());
+        IssueId a_feature = new IssueId(Guid.NewGuid());
         string a_feature_name = "I would like to see the Lion King movie when I press Alt-F4";
         string a_feature_description = "Hakuna matata";
 
-        TicketId a_defect = new TicketId(Guid.NewGuid());
+        IssueId a_defect = new IssueId(Guid.NewGuid());
         string a_defect_name = "Do not show the Lion King movie when I press return";
         string a_defect_description = "Say WHUT?";
 
@@ -30,7 +32,7 @@ namespace SaasOvation.IssueTrack.Domain
         {
             Setup_the_SUT_and_activate_the_product();
 
-            SUT.RequestFeature(a_tenant,a_product,a_feature,a_feature_name,a_feature_description);
+            SUT.RequestFeature(a_tenant,a_product,a_feature,a_feature_name,a_feature_description,an_assigner);
 
             var result = State.GetById(a_tenant,a_product,a_feature);
             result.Id.ShouldBe(a_feature);
@@ -43,7 +45,7 @@ namespace SaasOvation.IssueTrack.Domain
         {
             Setup_the_SUT_and_activate_the_product();
 
-            SUT.ReportDefect(a_tenant, a_product, a_defect, a_defect_name, a_defect_description);
+            SUT.ReportDefect(a_tenant, a_product, a_defect, a_defect_name, a_defect_description,an_assigner);
 
             var result = State.GetById(a_tenant, a_product, a_defect);
             result.Id.ShouldBe(a_defect);
@@ -59,6 +61,7 @@ namespace SaasOvation.IssueTrack.Domain
 
             State.TenantActivated(a_tenant);
             State.ProductActivated(a_tenant, a_product, a_product_name, a_product_description);
+            State.IssueAssignerActivated(a_tenant,an_assigner);
         }
 
 

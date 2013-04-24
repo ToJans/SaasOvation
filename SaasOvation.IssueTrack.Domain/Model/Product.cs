@@ -33,24 +33,32 @@ namespace SaasOvation.IssueTrack.Domain.Model
             Changes.ProductActivated(Tenant, Id, Name, Description);
         }
 
-        public void RequestFeature(TenantId Tenant, ProductId Product, TicketId Id, string Name, string Description)
+        public void RequestFeature(TenantId Tenant, ProductId Product, IssueId Id, string Name, string Description,IssueAssignerId Assigner)
         {
             MustBeActive(Tenant,Product);
-            Changes.TicketRegistered(Tenant,Product,Id, Name, Description);
+            MustBeActive(Tenant,assigner:Assigner);
+            Changes.IssueRegistered(Tenant,Product,Id, Name, Description,Assigner);
             
         }
 
-        public void ReportDefect(TenantId Tenant, ProductId Product, TicketId Id, string Name, string Description)
+        public void ReportDefect(TenantId Tenant, ProductId Product, IssueId Id, string Name, string Description,IssueAssignerId Assigner)
         {
             MustBeActive(Tenant, Product);
-            Changes.TicketRegistered(Tenant, Product, Id, Name, Description);
+            Changes.IssueRegistered(Tenant, Product, Id, Name, Description,Assigner);
         }
 
-        void MustBeActive(TenantId tenant = null, ProductId product = null, TicketId ticket = null)
+        public void CloseIssue(TenantId Tenant, ProductId Product, IssueId Id)
+        {
+            MustBeActive(Tenant, Product, Id);
+            Changes.IssueClosed(Tenant, Product, Id);
+        }
+
+        void MustBeActive(TenantId tenant = null, ProductId product = null, IssueId ticket = null,IssueAssignerId assigner=null)
         {
             if (tenant != null) Guard.That(Queries.IsActive(tenant), "This is an inactive tenant");
             if (product != null) Guard.That(Queries.IsActive(tenant,product), "This is an inactive product");
             if (ticket != null) Guard.That(Queries.IsActive(tenant, product, ticket), "This is an inactive ticket");
+            if (assigner != null) Guard.That(Queries.IsActive(tenant, assigner), "This is an inactive assigner");
         }
     }
 }
