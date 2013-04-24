@@ -4,6 +4,12 @@ This code is being written during [@VaughnVernon](http://vaughnvernon.co/) 's [#
 
 *It should not matter where or how you store your state, if you do respect this approach*
 
+It might look a bit like this:
+
+![That looks painful](http://lh6.ggpht.com/_2VEaTPMR9yw/So8uWIZSPFI/AAAAAAAAAVo/PhxXTpF7bD8/basketball_fail%5B2%5D.jpg?imgmax=800)
+
+... but I found out that the flow is actually pretty nice when you start developing like this ...
+
 ## Some context
 
 Due to my more recent experiments with [Erlang](http://www.erlang.org/), I think I might have found a way to model the domain in a way that refactoring does not hurt as much as the more conventional approach, and that it allows you to remove infrastructure completely out of the model.
@@ -26,8 +32,9 @@ I think it is interesting to see how others implemented this:
 
 - [@yreynhout](https://github.com/yreynhout/IssueTracking)
 - [@ONE75](https://github.com/ONE75/IDDD)
+- [@JefClaes](https://github.com/JefClaes/iddd-labs)
 
-Feel free to send a pull request to add your own!
+Feel free to send a pull request to add your own! Just click the README.md file in the browser and press edit!!! #EasyPeasy
 
 [As Alan Kay points out](http://lists.squeakfoundation.org/pipermail/squeak-dev/1998-October/017019.html), the original focus in OO was not about the state, but about the interactions/messaging between objects.
 
