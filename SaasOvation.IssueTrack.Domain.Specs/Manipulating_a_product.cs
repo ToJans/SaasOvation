@@ -10,7 +10,7 @@ namespace SaasOvation.IssueTrack.Domain.Specs
     public class Manipulating_a_product
     {
         IHandleProductCommands SUT;
-        ProductState ProductState;
+        ProductState State;
         TicketState TicketState;
 
         TenantId a_tenant_id = new TenantId(Guid.NewGuid());
@@ -30,7 +30,7 @@ namespace SaasOvation.IssueTrack.Domain.Specs
         
             SUT.ActivateProduct(a_tenant_id,a_product_id, a_product_name,a_product_description);
             
-            ProductState.IsActive(a_tenant_id, a_product_id).ShouldBe(true);
+            State.IsActive(a_tenant_id, a_product_id).ShouldBe(true);
         }
 
         [TestMethod]
@@ -41,8 +41,8 @@ namespace SaasOvation.IssueTrack.Domain.Specs
             SUT.ActivateProduct(a_tenant_id, a_product_id, a_product_name, a_product_description);
             SUT.ActivateProduct(another_tenant_id, another_product_id, another_product_name, another_product_description);
 
-            ProductState.IsActive(a_tenant_id, a_product_id).ShouldBe(true);
-            ProductState.IsActive(another_tenant_id, another_product_id).ShouldBe(true);
+            State.IsActive(a_tenant_id, a_product_id).ShouldBe(true);
+            State.IsActive(another_tenant_id, another_product_id).ShouldBe(true);
         }
 
         [TestMethod, ExpectedException(typeof(InvalidOperationException))]
@@ -57,13 +57,12 @@ namespace SaasOvation.IssueTrack.Domain.Specs
 
         void Setup_the_SUT_and_activate_the_tenants()
         {
-            ProductState = new ProductState();
-            TicketState = new TicketState();
+            State = new ProductState();
 
-            SUT = new Product(ProductState, ProductState, TicketState, TicketState);
+            SUT = new Product(State);
 
-            ProductState.TenantActivated(a_tenant_id);
-            ProductState.TenantActivated(another_tenant_id);
+            State.TenantActivated(a_tenant_id);
+            State.TenantActivated(another_tenant_id);
         }
 
     }

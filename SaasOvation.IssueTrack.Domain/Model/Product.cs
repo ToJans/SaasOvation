@@ -16,31 +16,27 @@ namespace SaasOvation.IssueTrack.Domain.Model
 
     public class Product: IHandleProductCommands
     {
-        private IModifyProductState ProductChanges;
-        private IQueryProductState ProductQueries;
-        private IModifyTicketState TicketChanges;
-        private IQueryTicketState TicketQueries;
+        private IModifyProductState Changes;
+        private IQueryProductState Queries;
 
-        public Product(
-                IModifyProductState ProductChanges,IQueryProductState ProductQueries,
-                IModifyTicketState TicketChanges,IQueryTicketState TicketQueries) {
-            this.ProductChanges = ProductChanges;
-            this.ProductQueries = ProductQueries;
-            this.TicketChanges= TicketChanges;
-            this.TicketQueries = TicketQueries;
+        public Product(ProductState State) : this(State, State) { }
+
+        public Product(IModifyProductState Changes,IQueryProductState Queries) {
+            this.Changes = Changes;
+            this.Queries = Queries;
         }
 
         public void ActivateProduct(TenantId Tenant, ProductId Id, string Name, string Description)
         {
             MustBeActive(Tenant);
-            Guard.Against(ProductQueries.IsActive(Tenant,Id),"This product is already active.");
-            ProductChanges.ProductActivated(Tenant, Id, Name, Description);
+            Guard.Against(Queries.IsActive(Tenant,Id),"This product is already active.");
+            Changes.ProductActivated(Tenant, Id, Name, Description);
         }
 
         public void RequestFeature(TenantId Tenant, ProductId Product, TicketId Id, string Name, string Description)
         {
             MustBeActive(Tenant,Product);
-            TicketChanges.TicketRegistered(Tenant,Product,Id, Name, Description);
+            Changes.TicketRegistered(Tenant,Product,Id, Name, Description);
             
         }
 
@@ -51,13 +47,9 @@ namespace SaasOvation.IssueTrack.Domain.Model
 
         void MustBeActive(TenantId tenant = null, ProductId product = null, TicketId ticket = null)
         {
-            if (tenant != null) Guard.That(ProductQueries.IsActive(tenant), "This is an inactive tenant");
-            if (product != null) Guard.That(ProductQueries.IsActive(tenant,product), "This is an inactive product");
-            if (ticket != null) Guard.That(TicketQueries.IsActive(tenant, product, ticket), "This is an inactive ticket");
+            if (tenant != null) Guard.That(Queries.IsActive(tenant), "This is an inactive tenant");
+            if (product != null) Guard.That(Queries.IsActive(tenant,product), "This is an inactive product");
+            if (ticket != null) Guard.That(Queries.IsActive(tenant, product, ticket), "This is an inactive ticket");
         }
-
-
-
-
     }
 }

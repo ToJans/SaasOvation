@@ -19,8 +19,7 @@ namespace SaasOvation.IssueTrack.Domain
         string a_feature_name="I would like to see the Lion King movie when I press Alt-F4";
         string a_feature_description="Hakuna matata";
 
-        ProductState ProductState;
-        TicketState TicketState;
+        ProductState State;
 
         [TestMethod]
         public void Request_a_feature()
@@ -29,7 +28,7 @@ namespace SaasOvation.IssueTrack.Domain
 
             SUT.RequestFeature(a_tenant,a_product,a_feature,a_feature_name,a_feature_description);
 
-            var result = TicketState.GetById(a_tenant,a_product,a_feature);
+            var result = State.GetById(a_tenant,a_product,a_feature);
             result.Id.ShouldBe(a_feature);
             result.Name.ShouldBe(a_feature_name);
             result.Description.ShouldBe(a_feature_description);
@@ -37,13 +36,12 @@ namespace SaasOvation.IssueTrack.Domain
 
         void Setup_the_SUT_and_activate_the_product()
         {
-            ProductState = new ProductState();
-            TicketState = new TicketState();
+            State = new ProductState();
 
-            SUT = new Product(ProductState, ProductState, TicketState, TicketState);
+            SUT = new Product(State);
 
-            ProductState.TenantActivated(a_tenant);
-            ProductState.ProductActivated(a_tenant, a_product, a_product_name, a_product_description);
+            State.TenantActivated(a_tenant);
+            State.ProductActivated(a_tenant, a_product, a_product_name, a_product_description);
         }
 
 

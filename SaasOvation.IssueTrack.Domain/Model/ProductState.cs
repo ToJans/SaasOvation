@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SaasOvation.IssueTrack.Domain.Model
 {
 
-    public class ProductState : IModifyProductState, IQueryProductState
+    public class ProductState:TicketState, IModifyProductState, IQueryProductState
     {
         List<TenantId> ActiveTenants = new List<TenantId>();
         List<ProductView> RegisteredProducts = new List<ProductView>();

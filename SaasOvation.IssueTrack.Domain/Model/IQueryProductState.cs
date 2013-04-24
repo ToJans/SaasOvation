@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SaasOvation.IssueTrack.Domain.Model
 {
-    public interface IQueryProductState
+    public interface IQueryProductState:IQueryTicketState 
     {
         bool ProductExists(TenantId tenant, ProductId Product);
 
