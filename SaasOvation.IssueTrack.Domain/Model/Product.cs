@@ -31,7 +31,6 @@ namespace SaasOvation.IssueTrack.Domain.Model
             MustBeActive(Tenant,Product);
             MustBeActive(Tenant,assigner:Assigner);
             Changes.IssueRegistered(Tenant,Product,Id, Name, Description,IssueType.Feature,Assigner);
-            
         }
 
         public void ReportDefect(TenantId Tenant, ProductId Product, IssueId Id, string Name, string Description,IssueAssignerId Assigner)
