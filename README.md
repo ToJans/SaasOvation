@@ -34,7 +34,7 @@ I think it is interesting to see how others implemented this:
 - [@ONE75](https://github.com/ONE75/IDDD)
 - [@JefClaes](https://github.com/JefClaes/iddd-labs)
 
-Feel free to send a pull request to add your own!
+Feel free to send a pull request to add your own! Just click the README.md file in the browser and press edit!!! #EasyPeasy
 
 [As Alan Kay points out](http://lists.squeakfoundation.org/pipermail/squeak-dev/1998-October/017019.html), the original focus in OO was not about the state, but about the interactions/messaging between objects.
 
