@@ -32,6 +32,7 @@ I think it is interesting to see how others implemented this:
 
 - [@yreynhout](https://github.com/yreynhout/IssueTracking)
 - [@ONE75](https://github.com/ONE75/IDDD)
+- [@JefClaes](https://github.com/JefClaes/iddd-labs)
 
 Feel free to send a pull request to add your own!
 
