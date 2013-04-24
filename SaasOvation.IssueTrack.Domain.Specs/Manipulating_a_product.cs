@@ -46,7 +46,7 @@ namespace SaasOvation.IssueTrack.Domain.Specs
         }
 
         [TestMethod, ExpectedException(typeof(InvalidOperationException))]
-        public void Registering_a_product_with_the_same_id_should_fail()
+        public void Registering_a_product_twice_should_fail()
         {
             Setup_the_SUT_and_activate_the_tenants();
 
