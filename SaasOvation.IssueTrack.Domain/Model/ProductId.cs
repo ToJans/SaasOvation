@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SaasOvation.IssueTrack.Domain.Model
 {
-
-    public class Issue
+    public class ProductId : GenericId
     {
-        public TenantId Tenant { get; set; }
-        public ProductId Product { get; set; }
-        public IssueId Id { get; set; }
+        protected override string TypeString { get { return "product"; } }
+
+        public ProductId(Guid somevalue) : base(somevalue) { }
     }
+
 }

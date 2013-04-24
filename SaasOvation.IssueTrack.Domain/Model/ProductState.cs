@@ -9,9 +9,15 @@ namespace SaasOvation.IssueTrack.Domain.Model
 
     public class ProductState:IssueState, IModifyProductState, IQueryProductState
     {
+        public ProductState(IPublishDomainEvents bus):base(bus)
+        {
+            this.Bus = bus;
+        }
+
         List<TenantId> ActiveTenants = new List<TenantId>();
         List<ProductView> RegisteredProducts = new List<ProductView>();
         List<Tuple<TenantId, IssueAssignerId>> Assigners = new List<Tuple<TenantId, IssueAssignerId>>();
+        IPublishDomainEvents Bus;
         
 
         public void ProductActivated(TenantId TenantId, ProductId Id, string a_product_name, string a_product_description)

@@ -9,7 +9,7 @@ namespace SaasOvation.IssueTrack.Domain.Specs
     [TestClass]
     public class Manipulating_a_product
     {
-        IHandleProductCommands SUT;
+        IHandleDomainCommands SUT;
         ProductState State;
 
         TenantId a_tenant_id = new TenantId(Guid.NewGuid());
@@ -56,7 +56,7 @@ namespace SaasOvation.IssueTrack.Domain.Specs
 
         void Setup_the_SUT_and_activate_the_tenants()
         {
-            State = new ProductState();
+            State = new ProductState(null);
 
             SUT = new Product(State);
 

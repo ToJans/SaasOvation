@@ -28,7 +28,7 @@ namespace SaasOvation.IssueTrack.Domain.Specs
         [TestInitialize]
         public void Init()
         {
-            var state = new ProductState();    
+            var state = new ProductState(null);    
             SUT= state;
 
             state.ProductActivated(a_tenant_id, a_product_id, a_product_name, a_product_description);

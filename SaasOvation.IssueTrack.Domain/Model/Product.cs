@@ -7,14 +7,7 @@ using System.Threading.Tasks;
 namespace SaasOvation.IssueTrack.Domain.Model
 {
 
-    public class ProductId : GenericId 
-    { 
-        protected override string TypeString { get { return "product"; } }
-
-        public ProductId(Guid somevalue) : base(somevalue) { }
-    }
-
-    public class Product: IHandleProductCommands
+    public class Product: IHandleDomainCommands
     {
         private IModifyProductState Changes;
         private IQueryProductState Queries;
@@ -37,14 +30,14 @@ namespace SaasOvation.IssueTrack.Domain.Model
         {
             MustBeActive(Tenant,Product);
             MustBeActive(Tenant,assigner:Assigner);
-            Changes.IssueRegistered(Tenant,Product,Id, Name, Description,Assigner);
+            Changes.IssueRegistered(Tenant,Product,Id, Name, Description,IssueType.Feature,Assigner);
             
         }
 
         public void ReportDefect(TenantId Tenant, ProductId Product, IssueId Id, string Name, string Description,IssueAssignerId Assigner)
         {
             MustBeActive(Tenant, Product);
-            Changes.IssueRegistered(Tenant, Product, Id, Name, Description,Assigner);
+            Changes.IssueRegistered(Tenant, Product, Id, Name, Description,IssueType.Defect,Assigner);
         }
 
         public void CloseIssue(TenantId Tenant, ProductId Product, IssueId Id)

@@ -26,6 +26,8 @@ namespace SaasOvation.IssueTrack.Domain
         string a_defect_description = "Say WHUT?";
 
         ProductState State;
+        
+        Moq.Mock<IPublishDomainEvents> PubMoq;
 
         [TestMethod]
         public void Request_a_feature()
@@ -38,6 +40,8 @@ namespace SaasOvation.IssueTrack.Domain
             result.Id.ShouldBe(a_feature);
             result.Name.ShouldBe(a_feature_name);
             result.Description.ShouldBe(a_feature_description);
+
+            PubMoq.Verify(x => x.FeatureRequested(a_tenant, a_product, a_feature, a_feature_name, a_feature_description, an_assigner));
         }
 
         [TestMethod]
@@ -51,18 +55,24 @@ namespace SaasOvation.IssueTrack.Domain
             result.Id.ShouldBe(a_defect);
             result.Name.ShouldBe(a_defect_name);
             result.Description.ShouldBe(a_defect_description);
+
+            PubMoq.Verify(x=>x.DefectReported(a_tenant,a_product,a_defect,a_defect_name,a_defect_description,an_assigner));
         }
 
         void Setup_the_SUT_and_activate_the_product()
         {
-            State = new ProductState();
+            PubMoq = new Moq.Mock<IPublishDomainEvents>(Moq.MockBehavior.Loose);
+
+            State = new ProductState(PubMoq.Object);
 
             SUT = new Product(State);
 
             State.TenantActivated(a_tenant);
             State.ProductActivated(a_tenant, a_product, a_product_name, a_product_description);
             State.IssueAssignerActivated(a_tenant,an_assigner);
+
         }
+
 
 
     }
