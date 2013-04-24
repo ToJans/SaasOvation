@@ -28,7 +28,7 @@ This implementation is trying to achieve this by applying [CQRS](http://martinfo
 
 By doing this, you really postpone the infrastructure decisions to the very end of the solution.
 You make everything explicit, and really add an extra (but understandable) layer of explicitness.
-One important thing to notice here, is that the Query side really needs to respect the TDA principle, in order 
+One important thing to notice here, is that the Query side really needs to respect the [TDA](http://pragprog.com/articles/tell-dont-ask) principle, in order 
 for the domain to be completely detached from the implementation.
 
 This approach is an evolution of the technique used by [@abdullin](https://github.com/Lokad/lokad-iddd-sample/blob/master/Sample/Domain/CustomerAggregate/Customer.cs).
