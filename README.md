@@ -1,4 +1,4 @@
-# SaasOvation demo implementation
+# SaasOvation demo DDD implementation
 
 This code is being written during [@VaughnVernon](http://vaughnvernon.co/) 's [#IDDDtour](http://idddtour.com/) in Belgium. It is a very opinionated approach that I will use later on for my presentation. I am quite sure that there are or will be some caveats in this implementation, but the idea is to get you thinking about delaying your infrastructure decisions.
 
