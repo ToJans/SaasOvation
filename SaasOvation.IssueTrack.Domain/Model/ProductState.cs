@@ -7,31 +7,39 @@ using System.Threading.Tasks;
 namespace SaasOvation.IssueTrack.Domain.Model
 {
 
-
-    public class ProductState : IModifyProductState, IQueryProducts
+    public class ProductState : IModifyProductState, IQueryProductState
     {
+        List<TenantId> ActiveTenants = new List<TenantId>();
         List<ProductView> RegisteredProducts = new List<ProductView>();
+        
 
-        public void ProductRegistered(ProductId Id, TenantId TenantId, string a_product_name, string a_product_description)
+        public void ProductActivated(TenantId TenantId, ProductId Id, string a_product_name, string a_product_description)
         {
             RegisteredProducts.Add(new ProductView { Id = Id, TenantId = TenantId });
         }
 
-        public bool ProductExists(ProductId Id)
+        public bool ProductExists(TenantId TenantId, ProductId Id)
         {
-            return RegisteredProducts.Any(x => x.Id == Id);
+            return RegisteredProducts.Any(x => x.TenantId == TenantId && x.Id == Id);
+        }
+
+        public bool IsActive(TenantId TenantId, ProductId ProductId = null)
+        {
+            if (!ActiveTenants.Contains(TenantId)) return false;
+            if (ProductId == null) return true; 
+            var prod = GetById(TenantId,ProductId);
+            return (prod != null);
         }
 
 
-        public IEnumerable<ProductView> FindById(ProductId Id)
+        public ProductView GetById(TenantId a_tenant_id, ProductId a_product_id)
         {
-            return RegisteredProducts.Where(x => x.Id == Id);
+            return this.RegisteredProducts.FirstOrDefault(x=>x.TenantId == a_tenant_id && x.Id == a_product_id);
         }
 
-        public ProductView GetById(ProductId Id)
+        public void TenantActivated(TenantId a_tenant_id)
         {
-            return RegisteredProducts.FirstOrDefault(x => x.Id == Id);
+            ActiveTenants.Add(a_tenant_id);
         }
-
     }
 }

@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Shouldly">
       <HintPath>..\packages\Shouldly.1.1.1.1\lib\35\Shouldly.dll</HintPath>
     </Reference>
@@ -56,6 +59,7 @@
     <Compile Include="Manipulating_a_product.cs" />
     <Compile Include="Finding_products.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Manipulating_a_ticket.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SaasOvation.IssueTrack.Domain\SaasOvation.IssueTrack.Domain.csproj">

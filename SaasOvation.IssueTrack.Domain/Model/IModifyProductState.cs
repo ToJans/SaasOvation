@@ -7,6 +7,6 @@ namespace SaasOvation.IssueTrack.Domain.Model
 {
     public interface IModifyProductState
     {
-        void ProductRegistered(ProductId Id, TenantId TenantId, string a_product_name, string a_product_description);
+        void ProductActivated(TenantId Tenant,ProductId Id, string Name, string Description);
     }
 }

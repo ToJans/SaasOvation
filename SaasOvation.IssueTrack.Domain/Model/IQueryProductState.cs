@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace SaasOvation.IssueTrack.Domain.Model
 {
-    public interface IQueryProducts
+    public interface IQueryProductState
     {
-        bool ProductExists(ProductId a_product_id);
+        bool ProductExists(TenantId tenant, ProductId Product);
 
-        IEnumerable<ProductView> FindById(ProductId Id);
-        ProductView GetById(ProductId Id);
+        bool IsActive(TenantId tenant, ProductId product=null);
+
+        ProductView GetById(TenantId a_tenant_id, ProductId a_product_id);
     }
 }
