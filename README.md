@@ -20,6 +20,15 @@ In Erlang, while counterintuitive from the perspective of a conventional OO thin
  
 If you see erlang code combined with DDD, there is almost NO infrastructure code there...
 
+## Other implementations
+
+I think it is interesting to see how others implemented this:
+
+- [@yreynhout](https://github.com/yreynhout/IssueTracking)
+- [@ONE75](https://github.com/ONE75/IDDD)
+
+Feel free to send a pull request to add your own!
+
 [As Alan Kay points out](http://lists.squeakfoundation.org/pipermail/squeak-dev/1998-October/017019.html), the original focus in OO was not about the state, but about the interactions/messaging between objects.
 
 This implementation is trying to achieve this by applying [CQRS](http://martinfowler.com/bliki/CQRS.html) on a really low level. Some might suggest me to use F# or similar instead, and they might be right.
