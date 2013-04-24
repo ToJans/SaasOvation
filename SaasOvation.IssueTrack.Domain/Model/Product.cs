@@ -42,7 +42,8 @@ namespace SaasOvation.IssueTrack.Domain.Model
 
         public void ReportDefect(TenantId Tenant, ProductId Product, TicketId Id, string Name, string Description)
         {
-            throw new NotImplementedException();
+            MustBeActive(Tenant, Product);
+            Changes.TicketRegistered(Tenant, Product, Id, Name, Description);
         }
 
         void MustBeActive(TenantId tenant = null, ProductId product = null, TicketId ticket = null)
