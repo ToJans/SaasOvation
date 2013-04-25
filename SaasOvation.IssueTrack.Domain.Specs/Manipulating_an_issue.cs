@@ -27,12 +27,16 @@ namespace SaasOvation.IssueTrack.Domain
 
         ProductState State;
         
-        Moq.Mock<IPublishDomainEvents> PubMoq;
+        Moq.Mock<IPublishDomainEvents> DomainEventPublisherMock;
 
         [TestMethod]
         public void Request_a_feature()
         {
-            Setup_the_SUT_and_activate_the_product();
+            Setup_the_SUT();
+
+            State.TenantActivated(a_tenant);
+            State.ProductActivated(a_tenant, a_product, a_product_name, a_product_description);
+            State.IssueAssignerActivated(a_tenant, an_assigner);
 
             SUT.RequestFeature(a_tenant,a_product,a_feature,a_feature_name,a_feature_description,an_assigner);
 
@@ -41,35 +45,35 @@ namespace SaasOvation.IssueTrack.Domain
             result.Name.ShouldBe(a_feature_name);
             result.Description.ShouldBe(a_feature_description);
 
-            PubMoq.Verify(x => x.FeatureRequested(a_tenant, a_product, a_feature, a_feature_name, a_feature_description, an_assigner));
+            DomainEventPublisherMock.Verify(x => x.FeatureRequested(a_tenant, a_product, a_feature, a_feature_name, a_feature_description, an_assigner));
         }
 
         [TestMethod]
         public void Report_a_defect()
         {
-            Setup_the_SUT_and_activate_the_product();
+            Setup_the_SUT();
 
-            SUT.ReportDefect(a_tenant, a_product, a_defect, a_defect_name, a_defect_description,an_assigner);
+            State.TenantActivated(a_tenant);
+            State.ProductActivated(a_tenant, a_product, a_product_name, a_product_description);
+            State.IssueAssignerActivated(a_tenant, an_assigner);
+
+            SUT.ReportDefect(a_tenant, a_product, a_defect, a_defect_name, a_defect_description, an_assigner);
 
             var result = State.GetById(a_tenant, a_product, a_defect);
             result.Id.ShouldBe(a_defect);
             result.Name.ShouldBe(a_defect_name);
             result.Description.ShouldBe(a_defect_description);
 
-            PubMoq.Verify(x=>x.DefectReported(a_tenant,a_product,a_defect,a_defect_name,a_defect_description,an_assigner));
+            DomainEventPublisherMock.Verify(x=>x.DefectReported(a_tenant,a_product,a_defect,a_defect_name,a_defect_description,an_assigner));
         }
 
-        void Setup_the_SUT_and_activate_the_product()
+        void Setup_the_SUT()
         {
-            PubMoq = new Moq.Mock<IPublishDomainEvents>(Moq.MockBehavior.Loose);
+            DomainEventPublisherMock = new Moq.Mock<IPublishDomainEvents>(Moq.MockBehavior.Loose);
 
-            State = new ProductState(PubMoq.Object);
+            State = new ProductState(DomainEventPublisherMock.Object);
 
             SUT = new Product(State);
-
-            State.TenantActivated(a_tenant);
-            State.ProductActivated(a_tenant, a_product, a_product_name, a_product_description);
-            State.IssueAssignerActivated(a_tenant,an_assigner);
 
         }
 
