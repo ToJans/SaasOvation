@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaasOvation.IssueTrack.Domain.Model
 {
@@ -21,7 +19,6 @@ namespace SaasOvation.IssueTrack.Domain.Model
             return Issues.FirstOrDefault(x => x.Id == TicketId);
         }
 
-
         public bool IsActive(TenantId tenant, ProductId product, IssueId issue)
         {
             return Issues.Any(x => x.Id == issue);
@@ -35,7 +32,6 @@ namespace SaasOvation.IssueTrack.Domain.Model
             else
                 Bus.FeatureRequested(Tenant, Product, Id, Name, Description, assigner);
         }
-
 
         public void IssueClosed(TenantId Tenant, ProductId Product, IssueId Id)
         {
