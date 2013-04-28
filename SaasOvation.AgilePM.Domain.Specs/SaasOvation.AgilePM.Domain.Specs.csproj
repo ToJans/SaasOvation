@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D3ECB496-F144-4E03-9D2C-F032CA5DEC96}</ProjectGuid>
+    <ProjectGuid>{F631E542-211A-4217-B09D-E3C346A2942D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SaasOvation.IssueTrack.Domain.Specs</RootNamespace>
-    <AssemblyName>SaasOvation.IssueTrack.Domain.Specs</AssemblyName>
+    <RootNamespace>SaasOvation.AgilePM.Domain.Specs</RootNamespace>
+    <AssemblyName>SaasOvation.AgilePM.Domain.Specs</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,12 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Shouldly">
-      <HintPath>..\packages\Shouldly.1.1.1.1\lib\35\Shouldly.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -56,23 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Product_commands.cs" />
-    <Compile Include="Product_queries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Issue_commands.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SaasOvation.Common.Domain\SaasOvation.Common.Domain.csproj">
-      <Project>{9ecc7bfb-3a75-409b-94ab-cf48c989a572}</Project>
-      <Name>SaasOvation.Common.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SaasOvation.IssueTrack.Domain\SaasOvation.IssueTrack.Domain.csproj">
-      <Project>{3d5689a6-0fe1-4144-ba7f-0b7e612d3d6f}</Project>
-      <Name>SaasOvation.IssueTrack.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

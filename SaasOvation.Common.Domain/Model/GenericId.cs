@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SaasOvation.IssueTrack.Domain.Model
+namespace SaasOvation.Common.Domain.Model
 {
     public abstract class GenericId
     {
@@ -8,7 +8,7 @@ namespace SaasOvation.IssueTrack.Domain.Model
 
         private string Value;
 
-        public GenericId(Guid someId)
+        public GenericId(object someId)
         {
             this.Value = string.Format("{0}/{1}", TypeString, someId);
         }

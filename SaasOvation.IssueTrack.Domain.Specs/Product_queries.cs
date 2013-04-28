@@ -1,22 +1,21 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SaasOvation.IssueTrack.Domain.Model;
 using Shouldly;
 using System;
 
 namespace SaasOvation.IssueTrack.Domain.Specs
 {
     [TestClass]
-    public class Finding_products
+    public class Product_queries
     {
-        IQueryProductState SUT;
+        Model.Products.IQueryState SUT;
 
-        ProductId a_product_id = new ProductId(Guid.NewGuid());
-        TenantId a_tenant_id = new TenantId(Guid.NewGuid());
+        Model.Products.Id a_product_id = new Model.Products.Id(Guid.NewGuid());
+        Model.Tenants.Id a_tenant_id = new Model.Tenants.Id(Guid.NewGuid());
         string a_product_name = "Zee product";
         string a_product_description = "Zee description";
 
-        ProductId another_product_id = new ProductId(Guid.NewGuid());
-        TenantId another_tenant_id = new TenantId(Guid.NewGuid());
+        Model.Products.Id another_product_id = new Model.Products.Id(Guid.NewGuid());
+        Model.Tenants.Id another_tenant_id = new Model.Tenants.Id(Guid.NewGuid());
         string another_product_name = "Another product";
         string another_product_description = "Another description";
 
@@ -24,14 +23,12 @@ namespace SaasOvation.IssueTrack.Domain.Specs
         [TestInitialize]
         public void Init()
         {
-            var state = new ProductState(null);    
+            var state = new Model.Products.State(null);    
             SUT= state;
 
             state.ProductActivated(a_tenant_id, a_product_id, a_product_name, a_product_description);
             state.ProductActivated(another_tenant_id, another_product_id, another_product_name, another_product_description);
         }
-
-        
 
         [TestMethod]
         public void Get_a_product_by_id()
@@ -44,7 +41,7 @@ namespace SaasOvation.IssueTrack.Domain.Specs
         [TestMethod]
         public void Get_a_product_by_id_that_does_not_exist()
         {
-            var a_non_existing_product = new ProductId(Guid.NewGuid());
+            var a_non_existing_product = new Model.Products.Id(Guid.NewGuid());
             var result = SUT.GetById(a_tenant_id,a_non_existing_product);
             result.ShouldBe(null);
         }

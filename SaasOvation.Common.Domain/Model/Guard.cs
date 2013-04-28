@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SaasOvation.IssueTrack.Domain.Model
+namespace SaasOvation.Common.Domain.Model
 {
     public static class Guard
     {

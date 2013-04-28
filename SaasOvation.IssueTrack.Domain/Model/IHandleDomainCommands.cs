@@ -1,9 +1,12 @@
-﻿namespace SaasOvation.IssueTrack.Domain.Model
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SaasOvation.IssueTrack.Domain.Model
 {
-    public interface IHandleDomainCommands
+    public interface IHandleDomainCommands: Products.IHandleCommands
     {
-        void ActivateProduct(TenantId Tenant,ProductId Id, string Name, string Description);
-        void RequestFeature(TenantId Tenant,ProductId Product,IssueId Id,string Name,string Description,IssueAssignerId Assigner);
-        void ReportDefect(TenantId Tenant, ProductId Product, IssueId Id, string Name, string Description, IssueAssignerId Assigner);
     }
 }

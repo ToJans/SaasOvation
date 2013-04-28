@@ -1,24 +1,24 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SaasOvation.IssueTrack.Domain.Model;
 using Shouldly;
+using Moq;
 
 namespace SaasOvation.IssueTrack.Domain.Specs
 {
-
     [TestClass]
-    public class Manipulating_a_product
+    public class Product_commands
     {
-        IHandleDomainCommands SUT;
-        ProductState State;
+        Model.Products.IHandleCommands SUT;
+        Model.Products.State State;
+        Mock<Model.Products.IPublishEvents> ProductEventPublisherMock;
 
-        TenantId a_tenant_id = new TenantId(Guid.NewGuid());
-        ProductId a_product_id = new ProductId(Guid.NewGuid());
+        Model.Tenants.Id a_tenant_id = new Model.Tenants.Id(Guid.NewGuid());
+        Model.Products.Id a_product_id = new Model.Products.Id(Guid.NewGuid());
         string a_product_name = "Zee product";
         string a_product_description = "Zee description";
 
-        TenantId another_tenant_id = new TenantId(Guid.NewGuid());
-        ProductId another_product_id = new ProductId(Guid.NewGuid());
+        Model.Tenants.Id another_tenant_id = new Model.Tenants.Id(Guid.NewGuid());
+        Model.Products.Id another_product_id = new Model.Products.Id(Guid.NewGuid());
         string another_product_name = "Another product";
         string another_product_description = "Another description";
 
@@ -56,9 +56,11 @@ namespace SaasOvation.IssueTrack.Domain.Specs
 
         void Setup_the_SUT_and_activate_the_tenants()
         {
-            State = new ProductState(null);
+            ProductEventPublisherMock = new Mock<Model.Products.IPublishEvents>();
 
-            SUT = new Product(State);
+            State = new Model.Products.State(ProductEventPublisherMock.Object);
+
+            SUT = new Model.Products.CommandHandler(State);
 
             State.TenantActivated(a_tenant_id);
             State.TenantActivated(another_tenant_id);
