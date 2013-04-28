@@ -5,7 +5,7 @@ using System.Linq;
 namespace SaasOvation.IssueTrack.Domain.Model
 {
 
-    public class ProductState:IssueState, IModifyProductState, IQueryProductState
+    public class ProductState:IssueState, IModifyProductState, IQueryProductState, SaasOvation.IssueTrack.Domain.Model.IModifyTenantState
     {
         public ProductState(IPublishDomainEvents bus):base(bus)
         {

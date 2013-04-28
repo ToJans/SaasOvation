@@ -42,6 +42,7 @@
     <Compile Include="Model\Guard.cs" />
     <Compile Include="Model\IModifyProductState.cs" />
     <Compile Include="Model\IModifyIssueState.cs" />
+    <Compile Include="Model\IModifyTenantState.cs" />
     <Compile Include="Model\IPublishDomainEvents.cs" />
     <Compile Include="Model\IQueryProductState.cs" />
     <Compile Include="Model\IQueryIssueState.cs" />

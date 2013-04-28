@@ -9,7 +9,7 @@ namespace SaasOvation.IssueTrack.Domain.Specs
     public class Finding_products
     {
         IQueryProductState SUT;
-
+        
         ProductId a_product_id = new ProductId(Guid.NewGuid());
         TenantId a_tenant_id = new TenantId(Guid.NewGuid());
         string a_product_name = "Zee product";
